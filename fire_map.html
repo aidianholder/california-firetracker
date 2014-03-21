@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="http://openlayers.org/api/OpenLayers.js" type='text/javascript'></script>
+    <script type="text/javascript" src="fire_map.js"></script>
+        
+     <style>
+        html, body {
+            height:100%;
+            margin: 0;
+            width:100%;
+            font-family: sans-serif;
+        }
+        #map {
+            height:100%;
+            width:70%;
+            float:left;
+        }
+        
+        h4.popup {
+            margin: 10px auto;
+            font-variant: small-caps;
+            text-align: center;
+        }
+        
+        
+        div.popupContent h5{
+            margin: 0.5em auto 0 auto;
+            
+        }
+        
+        div.popupContent span {
+            font-size:0.8em;
+            
+        }
+       
+        
+        #legend {
+            width:25%;
+            max-width: 256px;
+            height:100%;
+            float:left;
+            padding: 2.5%;
+            font-size: 0.8em;
+         
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
+        li {
+            display: inline-block;
+        }
+        
+        
+        
+        
+        
+        #legend img {
+            height: 100%;
+            width: 100%;
+            float:left;
+           
+        }
+        
+        #legend p {
+            clear:left;
+            margin:auto;
+            text-align: center;
+            padding: 0 10%;
+            font-size: 0.8em;
+        }
+        
+        
+        dl {width:100%;}
+        
+        dt {
+            float:left;
+            clear:left;
+            width: 15%;
+            max-width: 48px;
+            height:2em;
+            display: inline-block;
+            /*overflow: hidden;*/
+            line-height: 2em;
+            margin: 0 0.5em 0.5em 0;
+            
+        }
+        
+        dd {
+            float: left;
+            clear: right;
+            width:70%;
+            margin: 0 0 0 10%;
+            line-height: 1em;
+            text-align: center;
+        }
+        
+               
+        
+        
+        .modis24 {
+            background-color: #fa0000;
+            }
+        .modis48 {background-color: #F78222;}
+        .modis7 {background-color: #FDFB99;}
+        
+        
+    </style>
+    
+    <title>California Wildfire Tracker</title>
+</head>
+
+<body onload="init()">
+    <div id="map"></div>
+    <div id="legend">
+        <h4>Named Wildfires</h4>
+        <dl>
+            <dt class="wildfire"><img src="legend-wildfire.png" alt="named wildfire"</dt><dd>Active Wildfire</dd>
+            <dt class><img src="legend-fire-inactive.png" alt="inactive named wildfire"></dt><dd>Inactive Wildfire</dd>
+            <dt class="perimeter"><img alt="Active Wildfire Perimeter" src="legend-perimeter.png"></dt><dd>Active Wildfire Perimeter</dd>
+        </dl>
+        
+        <p>Click on a named wildfire for the latest update on the fire.  Only major and serious incidents are named, and not all named fires have a mapped perimeter</p>
+
+        <h4>Satellite Detections</h4>
+        <dl>
+            <dt class="modis24"></dt><dd>Past 24 Hours</dd>
+            <dt class="modis48"></dt><dd>Past 48 Hours</dd>
+            <dt class="modis7"></dt><dd>Past 7 Days</dd>
+            
+        </dl>
+        
+        <p>Satellite wildfire detections indicate a fire somewhere within the 1km square shown on the map, as detected by NASA's <a href="http://modis.gsfc.nasa.gov/">MODIS satellittes</a> Aquas and Terra</p>
+        
+    
+
+
+</body>
+</html>
