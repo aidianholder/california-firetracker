@@ -234,8 +234,9 @@ for fire in fireList:
 
 wildfires = FeatureCollection(featureList)
 
+outDir = "/opt/projects/wildfire/california-firetracker/"
 
-outfile = open("wildfires.geojson", "w")
+outfile = open(outDir + "wildfires.geojson", "w")
 outfile.write(str(wildfires))
 outfile.close()
 

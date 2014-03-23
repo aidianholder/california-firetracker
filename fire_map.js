@@ -18,9 +18,11 @@ function init() {
             
 
             var baseOSM = new OpenLayers.Layer.OSM("MapQuest-OSM Tiles", arrayOSM);
+           
+	    
+                        
             
-            
-            
+            /**for styling wildfire/incidents layer**/ 
             var context = {
                         selectGraphic: function(feature) {
                                     if (feature.attributes.status == "active") {
@@ -56,15 +58,8 @@ function init() {
             
             
                        
-            
+		/**for styling modis layers**/
 
-            
-            
-            /**var dpi_x = document.getElementById('testdiv').offsetWidth;
-            var dpi_y = document.getElementById('testdiv').offsetHeight;
-            
-            var dpi = (dpi_x + dpi_y)/2**/
-            
             
             var style = OpenLayers.Util.extend({}, OpenLayers.Feature.Vector.style["default"]);
                         style.graphicName = "square";
@@ -77,9 +72,6 @@ function init() {
                         
             
             
-            
-           
-            
             var defaultStyle = new OpenLayers.Style(style, {
                         context: {
                                     sizeFunction: function(feature){
@@ -88,10 +80,12 @@ function init() {
                                                             return 5
                                                 } else {
                                                             return 1000/feature.layer.map.getResolution();
+	        /**size function is to keep icon equal to scaled 1km, approx 'detection' size of modis birds**/ 
                                                 
                                                 }
                                     },
                                     
+	       /**color for different layers/times**/
                                     colorFunction: function(feature){
                                                 
                                                 if (feature.attributes.group == 24) {
@@ -146,7 +140,7 @@ function init() {
             });
             
             
-            var perimeters = new OpenLayers.Layer.WMS("Perimeters", "http://wildfire.cr.usgs.gov/arcgis/services/geomac_dyn/MapServer/WMSServer",
+           var perimeters = new OpenLayers.Layer.WMS("Perimeters", "http://wildfire.cr.usgs.gov/arcgis/services/geomac_dyn/MapServer/WMSServer",
                         {
                                     layers: "24",
                                     transparent: true,
@@ -159,33 +153,14 @@ function init() {
             )
                         
             
-            /**function modisSize() {
-                        var scale = map.getScale();
-                        var mp = 0.000352778*scale;
-                        var pr = 1000/mp;
-                        return pr;
-            }**/
 
 
-            map.addLayers([baseOSM, incidents, perimeters, modis24, modis48, modis7]);
+            map.addLayers([baseOSM, perimeters, incidents, modis24, modis48, modis7]);
 
             map.setCenter(
             new OpenLayers.LonLat(-121.4689, 38.5556).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()), 8);
-
-            /**kmSize = parseFloat((1/(0.0000254*map.getScale()))*72);
             
-            #var scale = map.getScale()
-            #var inch = 0.0000254
-            #var dpi = 72
-            
-            #function getKmSize(scale, inch, dpi) {
-            #            inchSize = inch * scale
-            #}
-            
-            #(1/(0.0000254*map.getScale()))*72
-            **/
-            
-            function buildPopupHTML(feature) {
+	    function buildPopupHTML(feature) {
                         console.log(feature.feature.attributes.name)
                         html = "<h4 class='popup'>" + feature.feature.attributes.name + " Fire</h4><div class='popupContent'>"
                         
@@ -238,8 +213,6 @@ function init() {
 
             incidents.events.on({"featureselected": addFirePopup, "featureunselected": removePopup});
             
-            /*var scaleline = new OpenLayers.Control.ScaleLine();
-            map.addControl(scaleline);*/
 
 
 }
