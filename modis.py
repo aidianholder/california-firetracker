@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 from datetime import datetime, timedelta
 from dateutil import parser
@@ -44,9 +44,11 @@ x1 = -113.0000
 x2 = -126.0000
 
 
-outfile24 = open('modis24.geojson', "w")
-outfile48 = open('modis48.geojson', "w")
-outfile7 = open('modis7.geojson', "w")
+outDir = '/opt/projects/wildfire/california-firetracker/'
+
+outfile24 = open(outDir + 'modis24.geojson', "w")
+outfile48 = open(outDir + 'modis48.geojson', "w")
+outfile7 = open(outDir + 'modis7.geojson', "w")
 
 modis24 = []
 modis48 = []
