@@ -102,14 +102,23 @@ def scrapeCDFDetails(fire):
         fire['location'] = soup.find('td', text='Location:').find_next_sibling('td').string.rstrip()
     except Exception:
         pass
-    try:
-        fire['acres'] = soup.find('td', text='Estimated - Containment: ').find_next_sibling('td').contents[0].split()[0]
-    except Exception:
-        pass
-    try:
-        fire['containment'] = soup.find('font').string
-    except Exception:
-        pass
+    
+    if soup.find('td', text="Estimated - Containment: ") != None:
+        try:
+            fire['acres'] = soup.find('td', text='Estimated - Containment: ').find_next_sibling('td').contents[0].split()[0]
+        except Exception:
+            pass
+        try:
+            fire['containment'] = soup.find('font').string
+        except Exception:
+            pass
+    else:
+        try:
+            acresContain = soup.find('td', text='Acres Burned - Containment: ').find_next_sibling('td').contents[0].split()
+            fire['acres'] = acresContain[0]
+            fire['containment'] = acresContain[-2]
+        except Exception:
+            pass
     return fire
 
 
