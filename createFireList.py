@@ -232,7 +232,7 @@ for fire in fireList:
     firePoint = Point((fire.get('longitude'), fire.get('latitude')))
     if fire['last_update'] <= (datetime.now(tzlocal()) - timedelta(weeks=2, hours=6)):
         fire['status'] = 'inactive'
-    elif 'containment' in fire and fire['containment'] == "100%":
+    elif 'containment' in fire and fire['containment'] == "100%" and fire['last_update'] <= (datetime.now(tzlocal()) - timedelta(weekds=1, hours=6)):
             fire['status'] = 'inactive'
     else:
         fire['status'] = 'active'
